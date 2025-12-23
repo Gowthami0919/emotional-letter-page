@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Naveen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Handwriting Font -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400&display=swap');
+
+body{
+  margin:0;
+  background:linear-gradient(135deg,#f6d1d1,#fbeaea);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Poppins',sans-serif;
+}
+
+.container{
+  width:90%;
+  max-width:850px;
+  text-align:center;
+}
+
+.name{
+  font-family:'Playfair Display',serif;
+  font-size:34px;
+  color:#5c2b2b;
+  margin-bottom:6px;
+}
+
+.subtitle{
+  color:#7a4a4a;
+  margin-bottom:35px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:25px;
+}
+
+.envelope{
+  position:relative;
+  height:130px;
+  background:#f7b6b6;
+  border-radius:14px;
+  cursor:pointer;
+  box-shadow:0 12px 28px rgba(0,0,0,0.18);
+  overflow:hidden;
+}
+
+.envelope::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:#f2a3a3;
+  clip-path:polygon(0 0,100% 0,50% 60%);
+  transform-origin:top;
+  transition:0.6s;
+}
+
+.envelope:hover::before{
+  transform:rotateX(180deg);
+}
+
+.label{
+  position:absolute;
+  bottom:18px;
+  width:100%;
+  text-align:center;
+  color:#5c2b2b;
+  font-weight:500;
+}
+
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:15px;
+}
+
+.letter{
+  background:#fffaf6;
+  width:100%;
+  max-width:700px;
+  padding:30px 25px;
+  border-radius:20px;
+  animation:paperUp 0.6s ease;
+  box-shadow:0 25px 45px rgba(0,0,0,0.3);
+  position:relative;
+}
+
+@keyframes paperUp{
+  from{transform:translateY(90px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+.close{
+  position:absolute;
+  top:12px;
+  right:18px;
+  background:#f2a3a3;
+  border:none;
+  padding:6px 14px;
+  border-radius:18px;
+  cursor:pointer;
+}
+
+.letter h2{
+  font-family:'Playfair Display',serif;
+  text-align:center;
+  color:#5c2b2b;
+  margin-bottom:15px;
+}
+
+.letter img{
+  width:100%;
+  max-height:240px;
+  object-fit:cover;
+  border-radius:14px;
+  margin:15px 0 20px;
+}
+
+.chat{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.msg{
+  max-width:80%;
+  padding:14px 18px;
+  border-radius:18px;
+  line-height:1.8;
+  font-size:15px;
+}
+
+.left{
+  align-self:flex-start;
+  background:#f1f1f1;
+  border-bottom-left-radius:6px;
+}
+
+.right{
+  align-self:flex-end;
+  background:#f7c6c6;
+  border-bottom-right-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7e3b4fd3b4.mp3">
+</audio>
+
+<div class="container">
+  <div class="name">Naveen ✨</div>
+  <div class="subtitle">Some things I wanted to say… 🌿</div>
+
+  <div class="grid">
+    <div class="envelope" onclick="openLetter(1)">
+      <div class="label">Our Bond 🌸</div>
+    </div>
+    <div class="envelope" onclick="openLetter(2)">
+      <div class="label">I’m Sorry 🤍</div>
+    </div>
+    <div class="envelope" onclick="openLetter(3)">
+      <div class="label">One Question 🕊️</div>
+    </div>
+    <div class="envelope" onclick="openLetter(4)">
+      <div class="label">Your Space 🌿</div>
+    </div>
+  </div>
+</div>
+
+<div class="popup" id="popup">
+  <div class="letter">
+    <button class="close" onclick="closePopup()">Close</button>
+    <h2 id="title"></h2>
+    <img id="img">
+    <div class="chat" id="chat"></div>
+  </div>
+</div>
+
+<script>
+const data={
+1:{
+title:"Grateful for You 🌸",
+img:"https://miro.medium.com/v2/resize:fit:1024/1*kMNQhkcdhmf6YF1X7403eg.png",
+msgs:[
+{side:"left",text:"I’ve always felt grateful for the bond we share. From matching our vibe and hype to endless gossips and random conversations, everything felt easy and natural with you."},
+{side:"right",text:"The memories we made — late talks, laughs, understanding silences — they genuinely matter to me. I feel lucky to have you in my life."}
+]
+},
+2:{
+title:"An Apology 🤍",
+img:"https://media.invisioncic.com/e322713/monthly_2025_04/LongDistance-Love-Worth-the-Effort.webp.ce027eb6b35b7764c5a36083c8f0dd68.webp",
+msgs:[
+{side:"left",text:"I want to sincerely apologize for anything I did that hurt you — knowingly or unknowingly. It was never my intention to cause pain."},
+{side:"right",text:"If my words or actions made you uncomfortable or misunderstood, I truly regret it from my heart."}
+]
+},
+3:{
+title:"A Small Question 🕊️",
+img:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+msgs:[
+{side:"left",text:"I don’t know if an apology can fix everything, but I hope you can understand where I’m coming from."},
+{side:"right",text:"If there’s even a small chance for forgiveness, it would mean a lot to me."}
+]
+},
+4:{
+title:"Your Decision 🌿",
+img:"https://images.unsplash.com/photo-1520975916090-3105956dac38",
+msgs:[
+{side:"left",text:"Whatever decision you take, I respect it completely. Your comfort and peace matter more than anything else."},
+{side:"right",text:"Please tell me how you want me to be, what space you need — I’ll understand and respect it."}
+]
+}
+};
+
+function openLetter(n){
+document.getElementById("popup").style.display="flex";
+document.getElementById("title").innerText=data[n].title;
+document.getElementById("img").src=data[n].img;
+
+const chat=document.getElementById("chat");
+chat.innerHTML="";
+data[n].msgs.forEach(m=>{
+  chat.innerHTML+=`<div class="msg ${m.side}">${m.text}</div>`;
+});
+
+document.getElementById("bgm").play();
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+</script>
+
+</body>
+</html>
